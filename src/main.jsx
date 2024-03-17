@@ -9,16 +9,17 @@ Sentry.init({
   dsn: "https://83ad777e4b3621b84707c3526b3f54f7@o4506926680375296.ingest.us.sentry.io/4506926683914240",
   integrations: [
     Sentry.browserTracingIntegration(),
+    Sentry.metrics.metricsAggregatorIntegration(),
+    Sentry.reactRouterV6BrowserTracingIntegration({
+      useEffect:React.useEffect,
+    }),
     Sentry.replayIntegration({
       maskAllText: false,
       blockAllMedia: false,
     }),
   ],
-  
   tracesSampleRate: 1.0, 
-  
   tracePropagationTargets: ["localhost", /^https:\/\/yourserver\.io\/api/],
-
   replaysSessionSampleRate: 0.1, 
   replaysOnErrorSampleRate: 1.0, 
 });
